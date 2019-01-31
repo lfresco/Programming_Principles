@@ -25,3 +25,28 @@ class Link {
 		Link* succ;
 };
 
+int main(int argv, char * argc[]) {
+	std::cout << "Compila" << std::endl;
+	return 0;
+
+}
+
+Link* Link::insert(Link* n) {
+	
+	if(n == nullptr) return this; // niente da inserire
+	if(p == nullptr) return n; // niente in cui inserire
+
+	n -> succ = this; // fa sì che questo oggetto sia il successore di n
+	if(prev) prev -> succ = n; // fa sì che il predecessore
+				// di questo oggetto diventi il predecessore di n
+	n -> prev = prev; 
+	prev = n;
+	return n;
+	// non specifico mai this perchè possiamo accedere direttamente ai members
+}
+
+
+
+
+
+
