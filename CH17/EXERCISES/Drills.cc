@@ -82,6 +82,54 @@ int main(int argv, char * argc[]) {
 	init_vector(g);
 	std::cout << "vettore g di 20 elementi" << std::endl;
 	print_vector(g);
+	
+	/*
+	#################################################
+	/SECOND PART OF THE DRIL
+	#################################################
+	*/
+
+	// 1) Allocate an int, initialize it to 7, and assign its address to 
+	// a variable p1
+
+	int x{7};
+	int* p1 = &x;
+
+	// 2) Stampare il valore di p1 e dell'int a cui punta
+
+	std::cout << "p1 è uguale a " << p1 << std::endl;
+	std::cout << "p1 sta puntando a " << *p1 << std::endl;
+
+	// 3) allocare un array di 7 int, inizializzarli a 1,2,4,8 e assegnare il 
+	// suo indirizzo di memoria a p2
+	
+	int* h = new int[7];
+	h[0] = 1;
+	for(int i = 1; i < 7; i++) {
+		h[i] = h[i - 1] *2;
+	}
+	int* p2 = h;
+	
+	// 4) Stampare il valore di p2 e dell'array a cui punta
+
+	std::cout << "Il valore di p2 è " << p2 << std::endl;
+	print_array(h,7);
+	
+	// 5) Dichiarare un int* chiamato p3 e inizializzarlo con p2
+
+	int* p3 = p2;
+
+	// 6) Assegnare p1 a p2
+	
+	p1 = p2;
+
+	// 7) Assegnare p3 a p2
+
+	p2 = p3;
+
+	// 8) Stampare p1 e p2 e vedere a cosa puntano
+
+	std::cout << "p1 è uguale a " << p1 << std::endl;
 
 	return 0;
 }
