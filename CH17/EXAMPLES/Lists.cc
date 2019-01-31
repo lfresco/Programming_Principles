@@ -3,7 +3,7 @@ Le liste sono una tra le data structures più comuni e utili. Si dividono in dou
 linked lists and single linked lists. Andiamo a vedere la seconda.
 */
 #include <string>
-
+#include <iostream>
 struct Link {
 	std::string value; // value we want to store
 	Link* prev; // pointer all'elemento precedente
@@ -14,9 +14,10 @@ struct Link {
 
 Link* insert(Link* p, Link* n);
 Link* add(Link* p, Link* n);  // inserisce il primo elemento dopo il secondo
-Link* erase(Link* p) // elimina un elemento
+Link* erase(Link* p); // elimina un elemento
 Link* find(Link* p, const std::string& s); // trova un Link dato un valore
 Link* advance(Link* p, int n); // si muove di n posizioni lungo la lista
+void print_all (Link* p);
 
 int main(int argv, char * argc[]) {
 
@@ -31,6 +32,33 @@ int main(int argv, char * argc[]) {
 	Link* dei_nordici = new Link{"Thor"};
 	dei_nordici = insert(dei_nordici, new Link{"Odino"});
 	dei_nordici = insert(dei_nordici, new Link{"Freia"});
+	dei_nordici = insert(dei_nordici, new Link{"Zeus"});	
+
+	// Lists use
+	Link* dei_greci = new Link("Hera");
+	dei_greci = insert(dei_greci, new Link{"Athena"});
+	dei_greci = insert(dei_greci, new Link{"Mars"});
+	dei_greci = insert(dei_greci, new Link{"Poseidon"});
+
+	// Abbiamo fatto alcuni errori. Correggiamoli usando funzioni
+	// che abbiamo implementato
+
+	Link* p = find(dei_greci, "Mars");
+	if(p) p -> value = "Ares"; // if messo per evitare che p fosse un nullptr
+
+	Link* q = find(dei_nordici, "Zeus");
+	if(q) {
+		if(q == dei_nordici) dei_nordici = q -> succ; //per evitare di eli
+							      //minare il pointerprincipale
+		Link* z = erase(q); //elimino q dalla lista dei_nordici
+		dei_greci = insert(dei_greci,q); //aggiungo q alla lista dei_greci
+	}
+
+	print_all(dei_nordici);
+	std::cout << std::endl;
+
+	print_all(dei_greci);
+	std::cout << std::endl;
 }
 /*
 Questa funzione aggiunge p prima di n. Bisogna modificarla per fare si che tenga 
@@ -98,7 +126,14 @@ Link* advance(Link* p, int n) {
 	return p;
 }
 
-
+void print_all (Link* p) {
+	std::cout << "{" ;
+	while(p) {
+		std::cout << p -> value;
+		if(p = p -> succ) std::cout << ", ";
+	}
+	std::cout << "}" ;
+}
 
 
 
