@@ -25,7 +25,10 @@ class vector {
 								 //std::copy
 		}
 		
-		vector(const vector& );
+		vector(const vector& ); // copy constructor
+
+		vector(vector&& a); // move constructor
+		vector& operator=(vector&&); //move assignment
 		
 		int size() const { return sz;} //restituisce la dimensione del nostro vettore
 		~vector() // destructor 
@@ -68,4 +71,22 @@ vector& operator=(const vector& a) {
 	sz = a.sz; //assegna a sz il nuovo valore
 	return *this; // ritorna una self reference
 
+}
+
+vector::vector(vector&& a)
+	:sz{a.sz}, elem{a.elem} //copia elem e sz di a (del vettore che gli passiamo)
+{	
+	a.sz = 0;  //fa in modo che a diventi il vettore vuoto
+	a.elem = nullptr;
+}
+
+vector& vector::operator=(vector&& a)
+{
+	delete[] elem; //dealloca il vecchio spazio
+	elem = a.elem; //copia elem e sz dentro il nuovo vector
+	sz = a.sz;
+	// le due operazioni qua sotto fanno si che sia il vettore vuoto
+	a.elem = nullptr;
+	a.sz = 0;
+	return *this; // ritorna una self reference
 }
