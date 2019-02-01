@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <algorithm>
 // Un' implementazione molto semplice e scema di un vettore di doubles
 
 class vector {
@@ -35,7 +35,7 @@ class vector {
 			{ delete[] elem; } //libera la memoria
 		
 		vector& operator=(const vector& ); // copy assignment
-		
+		double& operator[](int n) {return elem[n]; } // return reference		
 
 		double get(int n) const {return elem[n]; } // access: read
 		void set(int n, double v) {elem[n] = v; } //access : write
@@ -49,20 +49,26 @@ int main (int argv, char * argc[]) {
 		v.set(i, 1.1 * i);
 		std::cout << "v[" << i <<"]==" << v.get(i) << std::endl;
 	}
+	
+	vector v2(10);
+	for (int i = 0;i < v2.size(); i++) {
+		v2[i] = i;
+		std::cout << v2[i];
+	}
 
 	return 0;
 }
 
-vector:: vector(const vector& arg) 
+vector::vector(const vector& arg) 
 	:sz{arg.sz}, elem{new double[arg.sz]} // alloca gli elementi
 	{
-		std::copy(arg, arg + sz, elem); // inizializza gli elementi
+		std::copy(arg.elem, arg.elem + sz, elem); // inizializza gli elementi
 	}
 
 
 
 
-vector& operator=(const vector& a) {
+vector& vector::operator=(const vector& a) {
 	
 	double* p = new double[a.sz]; //alloca nuova memoria
 	std::copy(a.elem, a.elem + sz, elem); // copia gli elementi
