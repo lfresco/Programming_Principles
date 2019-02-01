@@ -55,3 +55,17 @@ vector:: vector(const vector& arg)
 	{
 		std::copy(arg, arg + sz, elem); // inizializza gli elementi
 	}
+
+
+
+
+vector& operator=(const vector& a) {
+	
+	double* p = new double[a.sz]; //alloca nuova memoria
+	std::copy(a.elem, a.elem + sz, elem); // copia gli elementi
+	delete[] elem; // dealloca il vecchio spazio
+	elem = p; // assegna a elem il nuovo valore
+	sz = a.sz; //assegna a sz il nuovo valore
+	return *this; // ritorna una self reference
+
+}
