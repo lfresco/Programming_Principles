@@ -1,10 +1,12 @@
 #include <iostream>
 #include <string>
 #include <cstring>
-/*
 
-*/
 
+
+/**
+* Is palindrome using std::string
+**/ 
 bool is_palindrome (const std::string& s)
 {
 	int first = 0; // indice della prima lettera
@@ -17,6 +19,10 @@ bool is_palindrome (const std::string& s)
 	
 	return true;
 }
+
+/*
+ * Is palindrome using arrays
+*/
 
 bool is_palindrome(const char s[], int n) {
 	int first = 0;
@@ -35,6 +41,15 @@ std::istream& read_word(std::istream& is, char * buffer, int max) {
 	is >> buffer;
 
 	return is;
+}
+
+bool is_palindrome(const char* first, const char* last) {
+	while(first < last) {
+		if(*first != *last) return fals;
+		++first;
+		--last;
+	}
+	return true;
 }
 
 
