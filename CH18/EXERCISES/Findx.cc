@@ -1,6 +1,8 @@
 /*
 Scrivere una funzione che che trova la prima occorrenza della sottostringa x in una C-style string
 */
+#include <iostream>
+
 
 char* findx(const char* s, const char* x) {
 	// Come prima cosa andiamo a recuperare la dimensione di s e di x
@@ -20,7 +22,7 @@ char* findx(const char* s, const char* x) {
 			//questa posizione perchè sarà quella che dovremo ritornare
 			// alla fine
 
-			char * partenza  = s;
+			
 
 			//Ora dobbiamo scorrere in contemporanea s e x per vedere
 			//se gli elementi continuano a coincidere. Si possono veri
@@ -35,7 +37,7 @@ char* findx(const char* s, const char* x) {
 			{
 				if(!*(s + i + j)) return 0; // abbiamo raggiunto la fine di s (caso 3)
 				if(*(s + i +j) != *(x +j)) break; // x non trovato (caso 1)
-				if(!*(x + j + 1)) return (s + i);  // abbiamo trovato x (caso 2)
+				if(!*(x + j + 1)) return const_cast<char*>(s + i);  // abbiamo trovato x (caso 2)
 					
 					break;
 				}
@@ -43,4 +45,29 @@ char* findx(const char* s, const char* x) {
 		}
 		
 	return 0; // si arriva qua quando s non ha più elementi
+}
+void print_str(const char* s) {
+
+	if (s==0) {
+        	std::cout << "Cannot print from null pointer";
+		return;
+	}
+	while (*s) std::cout << *s++;
+}
+
+
+
+
+void test2() {
+    char a[] = "Longer test strin";
+    a[sizeof(a)-1] = 'g';
+    char b[] = { 't','e','s','t' };
+    char* sub = findx(a,b);
+    print_str(sub);
+    std::cout << "\n";
+}
+
+int main(int argv, char * argc[]) {
+
+	test2();
 }
